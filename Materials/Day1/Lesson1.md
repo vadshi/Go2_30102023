@@ -199,7 +199,7 @@ func main() {
 	fmt.Println("File descriptor successfully created!")
 
 	//2. Вычитываю набор байт из файл-дескриптора
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
 		log.Fatal(err)
 	}
