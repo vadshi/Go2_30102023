@@ -24,7 +24,7 @@
             "type" : "Admin",
             "age" : 32,
             "social" : {
-                "vkontakte" : "https://vk.com/id=123512",
+                "vkontakte" : "https://vk.com/id=123512"
             }
         },
         {
@@ -32,7 +32,7 @@
             "type" : "Regular",
             "age" : 12,
             "social" : {
-                "vkontakte" : "https://vk.com/id=123561235",
+                "vkontakte" : "https://vk.com/id=123561235"
             }
         },
         {
@@ -40,7 +40,7 @@
             "type" : "Regular",
             "age" : 19,
             "social" : {
-                "vkontakte" : "https://vk.com/id=12123123",
+                "vkontakte" : "https://vk.com/id=12123123"
             }
         },
         {
@@ -48,7 +48,7 @@
             "type" : "Regular",
             "age" : 42,
             "social" : {
-                "vkontakte" : "https://vk.com/id=999999",
+                "vkontakte" : "https://vk.com/id=999999"
             }
         }
     ]
@@ -86,7 +86,7 @@ json.Unmarshall(byteArr, &куда_помещаем)
 
 
 #### Шаг 4.1 Структуризация
-***Серилазция*** - процесс конвертации объекта в последовательгость байтов. 
+***Сериализация*** - процесс конвертации объекта в последовательгость байтов. 
 ***Десериализация*** - процесс конвертации последовательности байтов в объект.
 
 Идея структуризованного подхода состоит в том, что мы заранее подготавливаем набор структур, с ***ЯВНО ПРОПИСАННЫМИ ПРАВИЛАМИ*** сериализации/десериализации полей объектов.
@@ -97,19 +97,19 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 )
 
 //Struct for representation total slice
-// First Level ob JSON object Parsing
+//First Level ob JSON object Parsing
 type Users struct {
 	Users []User `json:"users"`
 }
 
 //Internal user representation
-//Second level of object JSON parsin
+//Second level of object JSON parsing
 type User struct {
 	Name   string `json:"name"`
 	Type   string `json:"type"`
@@ -117,7 +117,7 @@ type User struct {
 	Social Social `json:"social"`
 }
 
-//Socail block representation
+//Social block representation
 //Third level of object parsing
 type Social struct {
 	Vkontakte string `json:"vkontakte"`
@@ -146,7 +146,7 @@ func main() {
 	var users Users
 
 	// Вычитываем содержимое jsonFile в ВИДЕ ПОСЛЕДОВАТЕЛЬНОСТИ БАЙТ!
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -161,9 +161,9 @@ func main() {
 
 ```
 
-Идея структурированной сериализации/десериализации состоит в том, чтобы общаться с JSON объектами напрямую , через стыкову полей.
+Идея структурированной сериализации/десериализации состоит в том, чтобы общаться с JSON объектами напрямую , через стыковку полей.
 
-Для того, чтобы настроить стыкову полей нужно:
+Для того, чтобы настроить стыковку полей нужно:
 * Определить необходимые уровни объектности JSON (в нашем случае их 3)
 * Для каждого уровня объектности подготовить свою структуру, учитывающую набор полей объекта.
 ```
@@ -215,6 +215,37 @@ func main() {
 ### Шаг 5. Сериализация
 * Только один способ - структуризованный.
 ```
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"os"
+)
+
+type Professor struct {
+	Name       string     `json:"name"`
+	ScienceID  int        `json:"science_id"`
+	IsWorking  bool       `json:"is_working"`
+	University University `json:"university"`
+}
+
+type University struct {
+	Name string `json:"name"`
+	City string `json:"city"`
+}
+
+func main() {
+	prof1 := Professor{
+		Name:      "Bob",
+		ScienceID: 81263123,
+		IsWorking: true,
+		University: University{
+			Name: "BMSTU",
+			City: "Moscow",
+		},
+	}
 //1. Превратим профессора в последовательность байтов
 	byteArr, err := json.MarshalIndent(prof1, "", "   ")
 	if err != nil {
@@ -225,6 +256,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
 ```
 
 Сериализация - процесс перегона в байты. Поэтому на это этапе у нас на руках будет ```[]byte``` , который в последствии будет помещен в файл ```output.json```
