@@ -21,7 +21,6 @@ import (
 	"log"
 	"mime"
 	"net/http"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -48,7 +47,7 @@ func (ts *taskServer) taskHandler(w http.ResponseWriter, r *http.Request) {
 		// } else if r.Method == http.MethodDelete{
 		// 	ts.deleteAllTaskHandler(w, r)
 		} else {
-			http.Error(w, fmt.Sprint("expect method GET, POST, DELETE at '/task', got %v", r.Method), http.StatusMethodNotAllowed)
+			http.Error(w, fmt.Sprintf("expect method GET, POST, DELETE at '/task', got %v", r.Method), http.StatusMethodNotAllowed)
 			return
 		}
 		
@@ -57,7 +56,7 @@ func (ts *taskServer) taskHandler(w http.ResponseWriter, r *http.Request) {
 		path := strings.Trim(r.URL.Path, "/")
 		pathParts := strings.Split(path, "/")
 		if len(pathParts) < 2{
-			http.Error(w, fmt.Sprint("expect 'task/<id>' in task handler"), http.StatusBadRequest)
+			http.Error(w, "expect 'task/<id>' in task handler", http.StatusBadRequest)
 			return
 		}
 		id, err := strconv.Atoi(pathParts[1])
@@ -70,7 +69,7 @@ func (ts *taskServer) taskHandler(w http.ResponseWriter, r *http.Request) {
 		// } else if r.Method == http.MethodDelete{
 		// 	ts.deleteTaskHandler(w, r, int(id))
 		} else {
-			http.Error(w, fmt.Sprint("expect method GET, DELETE at '/task<id>', got %v", r.Method), http.StatusMethodNotAllowed)
+			http.Error(w, fmt.Sprintf("expect method GET, DELETE at '/task<id>', got %v", r.Method), http.StatusMethodNotAllowed)
 			return
 		}
 	}

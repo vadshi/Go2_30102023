@@ -62,7 +62,7 @@ func (ts *TaskStore) GetTask(id int) (Task, error) {
 }
 
 // GetAllTask retrieves all task from taskstore 
-func (ts *TaskStore) GetAllTask() []Task {
+func (ts *TaskStore) GetAllTasks() []Task {
 	ts.Lock()
 	defer ts.Unlock()
 
