@@ -45,8 +45,8 @@ func (ts *taskServer) taskHandler(w http.ResponseWriter, r *http.Request) {
 			ts.createTaskHandler(w, r)
 		} else if r.Method == http.MethodGet{
 			ts.getAllTaskHandler(w, r)
-		// } else if r.Method == http.MethodDelete{
-		// 	ts.deleteAllTaskHandler(w, r)
+		} else if r.Method == http.MethodDelete{
+			ts.deleteAllTaskHandler(w, r)
 		} else {
 			http.Error(w, fmt.Sprintf("expect method GET, POST, DELETE at '/task', got %v", r.Method), http.StatusMethodNotAllowed)
 			return
@@ -67,8 +67,8 @@ func (ts *taskServer) taskHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		if r.Method == http.MethodGet {
 			ts.getTaskHandler(w, r, int(id))
-		// } else if r.Method == http.MethodDelete{
-		// 	ts.deleteTaskHandler(w, r, int(id))
+		} else if r.Method == http.MethodDelete{
+			ts.deleteTaskHandler(w, r, int(id))
 		} else {
 			http.Error(w, fmt.Sprintf("expect method GET, DELETE at '/task<id>', got %v", r.Method), http.StatusMethodNotAllowed)
 			return
@@ -164,6 +164,22 @@ func (ts *taskServer) getTaskHandler(w http.ResponseWriter, r *http.Request, id 
 }
 
 
+func (ts *taskServer) deleteTaskHandler(w http.ResponseWriter, r *http.Request, id int){
+	log.Printf("Handling delete task at %s\n", r.URL.Path)
+
+	err := ts.store.DeleteTask(id)
+	if err != nil{
+		http.Error(w, err.Error(), http.StatusNotFound) // код ошибки 404
+		return
+	}
+}
+
+
+func (ts *taskServer) deleteAllTaskHandler(w http.ResponseWriter, r *http.Request){
+	log.Printf("Handling delete all tasks at %s\n", r.URL.Path)
+
+	ts.store.DeleteAllTasks()
+}
 
 func main() {
 	mux := http.NewServeMux()

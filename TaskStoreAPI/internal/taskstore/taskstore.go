@@ -47,7 +47,7 @@ func (ts *TaskStore) CreateTask(text string, tags []string, due time.Time) int {
 }
 
 
-// GetTask retrieves a task from taskstore by id
+// GetTask retrieves the task from taskstore by given id
 func (ts *TaskStore) GetTask(id int) (Task, error) {
 	ts.Lock()
 	defer ts.Unlock()
@@ -72,5 +72,28 @@ func (ts *TaskStore) GetAllTasks() []Task {
 	}
 
 	return allTasks
+
+}
+
+
+// DeleteAllTasks deletes all tasks in the taskstore
+func (ts *TaskStore) DeleteAllTasks() error {
+	ts.Lock()
+	defer ts.Unlock()
+
+	ts.tasks = make(map[int]Task)
+	return nil
+}
+
+// DeleteTask deletes the task from taskstore by given id. If no such id exists, return Error
+func (ts *TaskStore) DeleteTask(id int) error {
+	ts.Lock()
+	defer ts.Unlock()
+
+	if _, ok := ts.tasks[id]; !ok {
+		return fmt.Errorf("task with id=%d not found", id)
+	}
+	delete(ts.tasks, id)
+	return nil
 
 }

@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "TaskStore",
-    "dateExported": "2023-10-31T10:24:10.100Z",
+    "dateExported": "2023-10-31T11:36:58.766Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -24,11 +24,11 @@
             "colId": "cb47df96-a509-46ae-9d79-706c22df98ee",
             "containerId": "",
             "name": "Get Task By Id",
-            "url": "{{host}}{{port}}/task/ao",
+            "url": "{{host}}{{port}}/task/1",
             "method": "GET",
             "sortNum": 15000,
             "created": "2023-10-31T10:06:08.532Z",
-            "modified": "2023-10-31T10:20:27.789Z",
+            "modified": "2023-10-31T11:36:10.590Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -71,11 +71,11 @@
             "colId": "cb47df96-a509-46ae-9d79-706c22df98ee",
             "containerId": "",
             "name": "Delete Task By Id",
-            "url": "{{host}}{{port}}/task/",
+            "url": "{{host}}{{port}}/task/1",
             "method": "DELETE",
             "sortNum": 40000,
             "created": "2023-10-31T10:06:41.236Z",
-            "modified": "2023-10-31T10:06:41.236Z",
+            "modified": "2023-10-31T11:36:27.957Z",
             "headers": [],
             "params": [],
             "tests": []
