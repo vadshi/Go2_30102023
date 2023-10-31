@@ -25,7 +25,7 @@ type TaskStore struct {
 func New() *TaskStore {
 	ts := &TaskStore{}
 	ts.tasks = make(map[int]Task)
-	ts.nextId = 0
+	ts.nextId = 1
 	return ts
 }
 
