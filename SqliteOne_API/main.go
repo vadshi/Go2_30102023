@@ -6,7 +6,11 @@ import (
 	"log"
 	"os"
 	// обычно используемая библиотека для SQLite
-	_ "github.com/mattn/go-sqlite3"
+	// sudo apt install build-essential
+	// _ "github.com/mattn/go-sqlite3"
+
+	// Если хотим без привязки к Cи библиотекам
+	_ "modernc.org/sqlite"
 )
 
 // todo struct, represent single task
@@ -24,7 +28,10 @@ func main() {
 	os.Remove("./todo.db")
 
 	// Open database connection
-	db, err := sql.Open("sqlite3", "./todo.db")
+	// "github.com/mattn/go-sqlite3"
+	// db, err := sql.Open("sqlite3", "./todo.db")
+	//"modernc.org/sqlite"
+	db, err := sql.Open("sqlite", "./todo.db")
 
 	// Check if database connection was opened successfully
 	if err != nil {
@@ -37,7 +44,7 @@ func main() {
 	{ // Create table Block
 		// SQL statement to create a task table, with no records in it.
 		sqlStmt := `
-		CREATE TABLE task (id INTEGER NOT NULL PRIMARY KEY, task TEXT, owner TEXT, checked INTEGER);
+		CREATE TABLE IF NOT EXISTS task (id INTEGER NOT NULL PRIMARY KEY, task TEXT, owner TEXT, checked INTEGER);
 		DELETE FROM task;
 		`
 		// Execute the SQL statement
@@ -135,13 +142,13 @@ func main() {
 		tx.Commit()
 	}
 
-	{
-		// Delete records block
-		// Delete record(s)s
-		_, err = db.Exec("DELETE from task")
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
+	// {
+	// 	// Delete records block
+	// 	// Delete record(s)s
+	// 	_, err = db.Exec("DELETE from task")
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// }
 
 }
