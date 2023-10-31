@@ -26,6 +26,7 @@ import (
 	"time"
 
 	"github.com/vadshi/go2/TaskStoreAPI/internal/taskstore"
+	//"TaskStoreAPI/internal/taskstore"
 )
 
 type taskServer struct {
@@ -149,6 +150,7 @@ func (ts *taskServer) getTaskHandler(w http.ResponseWriter, r *http.Request, id 
 	task, err := ts.store.GetTask(id)
 	if err != nil{
 		http.Error(w, err.Error(), http.StatusNotFound) // код ошибки 404
+		return
 	}
 	js, err := json.Marshal(task)
 	if err != nil{

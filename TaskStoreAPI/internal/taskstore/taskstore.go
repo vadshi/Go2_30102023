@@ -61,7 +61,7 @@ func (ts *TaskStore) GetTask(id int) (Task, error) {
 
 }
 
-// GetAllTask retrieves all task from taskstore 
+// GetAllTask retrieves all task from taskstore, in arbitrary order
 func (ts *TaskStore) GetAllTasks() []Task {
 	ts.Lock()
 	defer ts.Unlock()
