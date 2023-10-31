@@ -47,7 +47,7 @@ func (ts *TaskStore) CreateTask(text string, tags []string, due time.Time) int {
 }
 
 
-// GetTask retrieves a task from task store by id
+// GetTask retrieves a task from taskstore by id
 func (ts *TaskStore) GetTask(id int) (Task, error) {
 	ts.Lock()
 	defer ts.Unlock()
@@ -58,5 +58,19 @@ func (ts *TaskStore) GetTask(id int) (Task, error) {
 	} else {
 		return Task{}, fmt.Errorf("task with id=%d not found", id)
 	}
+
+}
+
+// GetAllTask retrieves all task from taskstore 
+func (ts *TaskStore) GetAllTask() []Task {
+	ts.Lock()
+	defer ts.Unlock()
+
+	allTasks := make([]Task, 0, len(ts.tasks))
+	for _, task := range ts.tasks{
+		allTasks = append(allTasks, task)
+	}
+
+	return allTasks
 
 }
