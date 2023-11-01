@@ -1,0 +1,20 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "First",
+    "dateExported": "2023-11-01T12:07:02.486Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "host",
+            "value": "http://127.0.0.1"
+        },
+        {
+            "name": "port",
+            "value": ":8080"
+        },
+        {
+            "name": "prefix",
+            "value": "/api/v1"
+        }
+    ]
+}

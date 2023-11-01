@@ -65,7 +65,7 @@ func UpdateBookById(writer http.ResponseWriter, request *http.Request) {
 		json.NewEncoder(writer).Encode(msg)
 		return
 	}
-	oldBook, ok := models.FindBookById(id)
+	_, ok := models.FindBookById(id)
 	var newBook models.Book
 	if !ok {
 		log.Println("book not found in data base . id :", id)
@@ -81,7 +81,14 @@ func UpdateBookById(writer http.ResponseWriter, request *http.Request) {
 		json.NewEncoder(writer).Encode(msg)
 		return
 	}
-	//TODO:Нужно заменить oldBook на newBook в DB!
+	//DONE:Нужно заменить oldBook на newBook в DB!
+	res := models.UpdateBookById(id, newBook)
+	if !res{
+		msg := models.Message{Message: "Nothing to change"}
+		writer.WriteHeader(200)
+		json.NewEncoder(writer).Encode(msg)
+		return
+	}
 }
 
 func DeleteBookById(writer http.ResponseWriter, request *http.Request) {
@@ -95,7 +102,7 @@ func DeleteBookById(writer http.ResponseWriter, request *http.Request) {
 		json.NewEncoder(writer).Encode(msg)
 		return
 	}
-	book, ok := models.FindBookById(id)
+	_, ok := models.FindBookById(id)
 	if !ok {
 		log.Println("book not found in data base . id :", id)
 		writer.WriteHeader(404)
@@ -103,8 +110,8 @@ func DeleteBookById(writer http.ResponseWriter, request *http.Request) {
 		json.NewEncoder(writer).Encode(msg)
 		return
 	}
-	//TODO: Нужно удалить book из DB
-	
+	//DONE: Нужно удалить book из DB
+	models.DeleteBookById(id)
 	msg := models.Message{Message: "successfully deleted requested item"}
 	json.NewEncoder(writer).Encode(msg)
 }

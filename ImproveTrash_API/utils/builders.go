@@ -15,5 +15,5 @@ func BuildBookResource(router *mux.Router, prefix string) {
 }
 
 func BuildManyBooksResourcePrefix(router *mux.Router, prefix string) {
-	router.HandleFunc(prefix, handlers.GetAllBooks).Methods("GET")
+	router.HandleFunc(prefix+"s", handlers.GetAllBooks).Methods("GET")
 }
