@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	""ImproveTrash_API/models"
+	"ImproveTrash_API/models"
 	"github.com/gorilla/mux"
 )
 
@@ -104,6 +104,7 @@ func DeleteBookById(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 	//TODO: Нужно удалить book из DB
+	
 	msg := models.Message{Message: "successfully deleted requested item"}
 	json.NewEncoder(writer).Encode(msg)
 }

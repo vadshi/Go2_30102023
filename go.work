@@ -1,10 +1,12 @@
 go 1.21.3
 
 use (
+	./ImproveTrash_API
 	./JsonFiles
 	./SimpleHTTP_API
 	./SqliteOne_API
 	./TaskStoreAPI
+	./TaskStoreAPI_Gin
 	./Trash_API_GorillaMux
 	./hello
 )

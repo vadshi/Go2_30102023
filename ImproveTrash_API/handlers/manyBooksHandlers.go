@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	""ImproveTrash_API/models"
+	"ImproveTrash_API/models"
 )
 
 func initHeaders(writer http.ResponseWriter) {

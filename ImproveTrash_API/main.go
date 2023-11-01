@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	""ImproveTrash_API/utils"
+	"ImproveTrash_API/utils"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
@@ -21,7 +21,7 @@ var (
 )
 
 func init() {
-	err := godotenv.Load()
+	err := godotenv.Load() // by default path: "./.env"
 	if err != nil {
 		log.Fatal("could not find .env file:", err)
 	}

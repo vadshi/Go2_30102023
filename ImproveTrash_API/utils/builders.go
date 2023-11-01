@@ -5,6 +5,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Отдельные функции для роутинга
+
 func BuildBookResource(router *mux.Router, prefix string) {
 	router.HandleFunc(prefix+"/{id}", handlers.GetBookById).Methods("GET")
 	router.HandleFunc(prefix, handlers.CreateBook).Methods("POST")
