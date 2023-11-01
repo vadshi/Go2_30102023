@@ -7,7 +7,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-//Пытаемся откунфигурировать наш API инстанс (а конкретнее - поле logger)
+//Пытаемся отконфигурировать наш API инстанс (а конкретнее - поле logger)
 func (a *API) configreLoggerField() error {
 	log_level, err := logrus.ParseLevel(a.config.LoggerLevel)
 	if err != nil {

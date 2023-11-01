@@ -35,6 +35,6 @@ func (api *API) Start() error {
 
 	//Конфигурируем маршрутизатор
 	api.configreRouterField()
-	//На этапе валидного завршениея стратуем http-сервер
+	//На этапе валидного завершениея стратуем http-сервер
 	return http.ListenAndServe(api.config.BindAddr, api.router)
 }

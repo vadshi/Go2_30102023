@@ -9,5 +9,7 @@ use (
 	./TaskStoreAPI
 	./TaskStoreAPI_Gin
 	./Trash_API_GorillaMux
+	./Utils/CLI/cobraExample
+	./Utils/CLI/flagExample
 	./hello
 )
