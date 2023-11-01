@@ -14,6 +14,7 @@ type User struct {
 	Email string
 }
 
+// Реализация Valuer/Scanner интерфейса
 func (u *User) Scan(src interface{}) error {
 	input := src.([]byte) //type assertion !!!
 	json.Unmarshal(input, u)

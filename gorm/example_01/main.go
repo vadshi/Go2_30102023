@@ -14,7 +14,7 @@ type User struct {
 }
 
 func main() {
-	db, err := gorm.Open(sqlite.Open("/tmp/test.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("tmp/test.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
