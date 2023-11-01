@@ -5,6 +5,7 @@ use (
 	./JsonFiles
 	./SimpleHTTP_API
 	./SqliteOne_API
+	./StandardWebServer
 	./TaskStoreAPI
 	./TaskStoreAPI_Gin
 	./Trash_API_GorillaMux
