@@ -1,0 +1,8 @@
+go 1.21.3
+
+use (
+	./Nikolay_Yudin/TaskStoreAPI
+	./Sergey_Zverkov/taskStoreAPI
+	./SubroutingExample
+	./Иванов_Егор/TaskStoreAPIGorMux
+)
